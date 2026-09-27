@@ -1,0 +1,33 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# next
+.next/
+out/
+build/
+next-env.d.ts
+
+# env — NEVER commit real credentials
+.env
+.env.local
+.env*.local
+.env.production
+
+# test / tooling output
+coverage/
+playwright-report/
+test-results/
+.vercel
+*.tsbuildinfo
+
+# os / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# drizzle meta is committed; scratch is not
+drizzle/scratch/

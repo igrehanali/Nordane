@@ -1,0 +1,191 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Semantic tokens only. No component should reference a raw colour — swapping the
+  palette or adding a theme must never mean touching a component. Contrast pairs
+  below are checked against WCAG AA (4.5:1 for text, 3:1 for large text and UI
+  boundaries) in both themes.
+*/
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', 'Cascadia Mono', 'Liberation Mono', monospace;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+}
+
+:root {
+  --background: oklch(1 0 0);
+  --surface: oklch(0.976 0.003 247);
+  --foreground: oklch(0.21 0.02 255);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.21 0.02 255);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.21 0.02 255);
+
+  --primary: oklch(0.51 0.171 256);
+  --primary-foreground: oklch(0.99 0.002 247);
+  --secondary: oklch(0.968 0.005 247);
+  --secondary-foreground: oklch(0.28 0.025 255);
+  --muted: oklch(0.968 0.005 247);
+  --muted-foreground: oklch(0.487 0.024 256);
+  --accent: oklch(0.955 0.012 251);
+  --accent-foreground: oklch(0.28 0.025 255);
+
+  --destructive: oklch(0.545 0.203 27);
+  --destructive-foreground: oklch(0.99 0.002 247);
+  --success: oklch(0.49 0.118 157);
+  --success-foreground: oklch(0.99 0.002 247);
+  --warning: oklch(0.63 0.152 62);
+  --warning-foreground: oklch(0.99 0.002 247);
+  --info: oklch(0.52 0.128 234);
+  --info-foreground: oklch(0.99 0.002 247);
+
+  --border: oklch(0.916 0.008 251);
+  --border-strong: oklch(0.845 0.012 251);
+  --input: oklch(0.888 0.01 251);
+  --ring: oklch(0.51 0.171 256);
+}
+
+.dark {
+  --background: oklch(0.192 0.016 259);
+  --surface: oklch(0.163 0.015 259);
+  --foreground: oklch(0.965 0.004 247);
+
+  --card: oklch(0.232 0.017 259);
+  --card-foreground: oklch(0.965 0.004 247);
+  --popover: oklch(0.247 0.018 259);
+  --popover-foreground: oklch(0.965 0.004 247);
+
+  --primary: oklch(0.687 0.156 254);
+  --primary-foreground: oklch(0.175 0.028 259);
+  --secondary: oklch(0.276 0.018 259);
+  --secondary-foreground: oklch(0.955 0.005 247);
+  --muted: oklch(0.276 0.018 259);
+  --muted-foreground: oklch(0.706 0.021 256);
+  --accent: oklch(0.306 0.024 257);
+  --accent-foreground: oklch(0.965 0.004 247);
+
+  --destructive: oklch(0.663 0.193 25);
+  --destructive-foreground: oklch(0.175 0.028 259);
+  --success: oklch(0.7 0.145 158);
+  --success-foreground: oklch(0.175 0.028 259);
+  --warning: oklch(0.78 0.145 70);
+  --warning-foreground: oklch(0.175 0.028 259);
+  --info: oklch(0.7 0.125 234);
+  --info-foreground: oklch(0.175 0.028 259);
+
+  --border: oklch(0.316 0.019 259);
+  --border-strong: oklch(0.406 0.022 259);
+  --input: oklch(0.356 0.021 259);
+  --ring: oklch(0.687 0.156 254);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv05' 1;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Visible focus is non-negotiable: staff live on the keyboard all day. */
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Amounts and quantities never jitter between rows. */
+  table,
+  [data-numeric] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Dense data grid: sticky header, horizontal overflow, compact rows. */
+  .data-scroll {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+
+  .data-scroll::-webkit-scrollbar {
+    height: 0.625rem;
+    width: 0.625rem;
+  }
+
+  .data-scroll::-webkit-scrollbar-thumb {
+    background-color: var(--color-border-strong);
+    border-radius: 9999px;
+  }
+
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
